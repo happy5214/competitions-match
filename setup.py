@@ -41,7 +41,7 @@ setup(
 
     test_suite='tests',
 
-    entry_points = {
+    entry_points={
         'competitions.match.base': [
             'competitions.simple = competitions.match.default.SimpleMatch:SimpleMatch',
             'competitions.test = tests:TestMatch'
