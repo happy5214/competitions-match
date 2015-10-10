@@ -1,3 +1,4 @@
+# -*- coding: utf-8  -*-
 """A setuptools based setup module."""
 
 from setuptools import setup, find_packages
@@ -12,7 +13,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='competitions-match',
-    version='0.1a1',
+    version='0.1',
 
     description='competitions support library for matches',
     long_description=long_description,
