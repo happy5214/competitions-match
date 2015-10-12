@@ -20,7 +20,7 @@ from __future__ import unicode_literals
 
 from . import TestCase, TestMatch
 
-from competitions.match import config
+from competitions.match import MatchConfig, config
 from competitions.match.default.SimpleMatch import SimpleMatch
 
 
@@ -33,3 +33,37 @@ class TestMatchRegistration(TestCase):
         self.assertEqual(config.base_match, SimpleMatch)
         config.base_match = 'competitions.test'
         self.assertEqual(config.base_match, TestMatch)
+        config.base_match = 'competitions.unused'
+        self.assertIsNone(config.base_match)
+    
+    def test_singleton(self):
+        """Test to ensure the configuration object's singleton status."""
+        self.assertRaises(RuntimeError, MatchConfig)
+
+
+class TestSimpleMatch(TestCase):
+
+    """Basic sanity checks for SimpleMatch."""
+
+    def test_simulation(self):
+        """Test SimpleMatch construction and simulation."""
+        config.base_match = 'competitions.simple'
+        team1 = 'Team 1'
+        team2 = 'Team 2'
+        for __ in range(1000):
+            match = config.base_match(team1, team2)
+            self.assertIsInstance(match, SimpleMatch, 'Wrong class.')
+            self.assertEqual(match.team1, team1)
+            self.assertEqual(match.team2, team2)
+            match.play()
+            if match.score1 > match.score2:
+                self.assertEqual(match.winner, team1)
+            elif match.score2 > match.score1:
+                self.assertEqual(match.winner, team2)
+            else:
+                self.assertIsNone(match.winner)
+            shortstr = '{}-{}'.format(match.score1, match.score2)
+            self.assertEqual(match.shortstr(), shortstr)
+            longstr = '{} {} - {} {}'.format(team1, match.score1, match.score2,
+                                             team2)
+            self.assertEqual(str(match), longstr)

@@ -25,11 +25,13 @@ class MatchConfig(object):
 
     """Match configuration singleton class."""
 
+    created = False
+
     def __init__(self):
         """Constructor."""
-        if hasattr(self, 'created'):
+        if MatchConfig.created:
             raise RuntimeError
-        self.created = True
+        MatchConfig.created = True
         self._base_matches = {}
         for match in pkg_resources.iter_entry_points(group='competitions.match.base'):
             self._base_matches.update({match.name: match.load()})
@@ -41,8 +43,7 @@ class MatchConfig(object):
 
     @base_match.setter
     def base_match(self, match_def):
-        if match_def in self._base_matches.keys():
-            self._base_match = match_def
+        self._base_match = match_def
 
 
 config = MatchConfig()
