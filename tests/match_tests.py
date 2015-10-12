@@ -49,8 +49,8 @@ class TestSimpleMatch(TestCase):
     def test_simulation(self):
         """Test SimpleMatch construction and simulation."""
         config.base_match = 'competitions.simple'
-        team1 = 'Team 1'
-        team2 = 'Team 2'
+        team1 = 'First'
+        team2 = 'Second'
         for __ in range(1000):
             match = config.base_match(team1, team2)
             self.assertIsInstance(match, SimpleMatch, 'Wrong class.')
@@ -67,4 +67,28 @@ class TestSimpleMatch(TestCase):
             self.assertEqual(match.shortstr(), shortstr)
             longstr = '{} {} - {} {}'.format(team1, match.score1, match.score2,
                                              team2)
+            self.assertEqual(str(match), longstr)
+
+
+class TestTestMatch(TestCase):
+
+    """Basic sanity checks for TestMatch."""
+
+    def test_simulation(self):
+        """Test TestMatch construction and simulation."""
+        config.base_match = 'competitions.test'
+        team1 = 'First'
+        team2 = 'Second'
+        for __ in range(1000):
+            match = config.base_match(team1, team2)
+            self.assertIsInstance(match, TestMatch, 'Wrong class.')
+            self.assertEqual(match.team1, team1)
+            self.assertEqual(match.team2, team2)
+            match.play()
+            self.assertEqual(match.score1, 5)
+            self.assertEqual(match.score2, 0)
+            self.assertEqual(match.winner, team1)
+            shortstr = '5-0'
+            self.assertEqual(match.shortstr(), shortstr)
+            longstr = 'First 5 - 0 Second'
             self.assertEqual(str(match), longstr)
