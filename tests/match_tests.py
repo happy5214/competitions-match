@@ -18,10 +18,11 @@
 
 from __future__ import unicode_literals
 
-from . import TestCase, TestMatch
+from . import TestCase
 
 from competitions.match import MatchConfig, config
 from competitions.match.default.SimpleMatch import SimpleMatch
+from competitions.match.default.TestMatch import TestMatch
 
 
 class TestMatchRegistration(TestCase):

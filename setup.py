@@ -45,7 +45,7 @@ setup(
     entry_points={
         'competitions.match.base': [
             'competitions.simple = competitions.match.default.SimpleMatch:SimpleMatch',
-            'competitions.test = tests:TestMatch'
+            'competitions.test = competitions.match.default.TestMatch:TestMatch'
         ]
     },
 )
