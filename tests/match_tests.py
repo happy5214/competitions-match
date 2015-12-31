@@ -36,7 +36,7 @@ class TestMatchRegistration(TestCase):
         self.assertEqual(config.base_match, TestMatch)
         config.base_match = 'competitions.unused'
         self.assertIsNone(config.base_match)
-    
+
     def test_singleton(self):
         """Test to ensure the configuration object's singleton status."""
         self.assertRaises(RuntimeError, MatchConfig)
@@ -64,7 +64,7 @@ class TestSimpleMatch(TestCase):
             else:
                 self.assertIsNone(match.winner)
             shortstr = '{}-{}'.format(match.score1, match.score2)
-            self.assertEqual(match.shortstr(), shortstr)
+            self.assertEqual(match.score_str(), shortstr)
             longstr = '{} {} - {} {}'.format(team1, match.score1, match.score2,
                                              team2)
             self.assertEqual(str(match), longstr)
@@ -89,6 +89,6 @@ class TestTestMatch(TestCase):
             self.assertEqual(match.score2, 0)
             self.assertEqual(match.winner, team1)
             shortstr = '5-0'
-            self.assertEqual(match.shortstr(), shortstr)
+            self.assertEqual(match.score_str(), shortstr)
             longstr = 'First 5 - 0 Second'
             self.assertEqual(str(match), longstr)

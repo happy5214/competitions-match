@@ -1,5 +1,5 @@
 # -*- coding: utf-8  -*-
-"""Package for tests."""
+"""Base class for matches."""
 
 # Copyright (C) 2015 Alexander Jones
 #
@@ -18,20 +18,11 @@
 
 from __future__ import unicode_literals
 
-import sys
-import unittest
 
+class Match(object):
 
-PY2 = sys.version_info.major == 2
-PY3 = sys.version_info.major == 3
+    """Base class for matches."""
 
-
-class TestCase(unittest.TestCase):
-
-    """Subclass of unittest.TestCase."""
-
-    if PY2:
-
-        def assertCountEqual(self, *args, **kwargs):
-            """Wrapper of assertItemsEqual()."""
-            return self.assertItemsEqual(*args, **kwargs)
+    def play(self):
+        """Play the match."""
+        raise NotImplementedError
