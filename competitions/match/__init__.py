@@ -39,10 +39,16 @@ class MatchConfig(object):
 
     @property
     def base_match(self):
+        """The "base" match class."""
         return self._base_matches.get(self._base_match, None)
 
     @base_match.setter
     def base_match(self, match_def):
+        """Set the "base" match class.
+
+        @param match_def: The code of the new "base" match class
+        @type match_def: str
+        """
         self._base_match = match_def
 
 
