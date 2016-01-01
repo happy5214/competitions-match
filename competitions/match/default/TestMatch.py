@@ -71,6 +71,7 @@ class TestMatch(Match):
     def play(self):
         """Play the match.
 
+        This simulator will always result in a 5-0 win for team1.
         @return: The winner (or None if the result is a draw)
         @rtype: An object that can be converted to a string or NoneType
         """
