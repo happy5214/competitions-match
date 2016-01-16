@@ -78,4 +78,5 @@ class TestMatch(Match):
         self.score1 = 5
         self.score2 = 0
         self.winner = self.team1
+        self.loser = self.team2
         return self.winner

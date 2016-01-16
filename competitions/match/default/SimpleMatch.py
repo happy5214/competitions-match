@@ -93,10 +93,13 @@ class SimpleMatch(Match):
                 score2 += 1
         if score1 > score2:
             self.winner = self.team1
+            self.loser = self.team2
         elif score2 > score1:
             self.winner = self.team2
+            self.loser = self.team1
         else:
             self.winner = None
+            self.loser = None
         self.score1 = score1
         self.score2 = score2
         return self.winner
