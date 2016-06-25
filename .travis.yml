@@ -8,6 +8,12 @@ python:
 # install: "pip install -r requirements.txt"
 install:
   - pip install coveralls
+  - pip install codeclimate-test-reporter
 # command to run tests
 script: coverage run setup.py test
-after_success: coveralls
+after_success:
+  - coveralls
+  - codeclimate-test-reporter
+addons:
+    code_climate:
+        repo_token: 92d3ccf66ad459aafa2cf408fdb0872f72c92781026a12f6f513cd43fb16cf44
