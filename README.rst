@@ -13,3 +13,6 @@ of this system with competitions-cup and competitions-league, among others.
 .. image:: https://coveralls.io/repos/happy5214/competitions-match/badge.svg?branch=master&service=github
     :alt: Coverage status
     :target: https://coveralls.io/github/happy5214/competitions-match?branch=master
+.. image:: https://codeclimate.com/github/happy5214/competitions-match/badges/gpa.svg
+    :target: https://codeclimate.com/github/happy5214/competitions-match
+    :alt: Code Climate
