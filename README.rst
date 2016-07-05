@@ -7,6 +7,13 @@ competitions series of packages.
 This package will include simple default match simulators to support basic usage
 of this system with competitions-cup and competitions-league, among others.
 
+Changes in v0.2
+---------------
+
+- Generic competitor fields
+- Walkover detection for two-competitor matches
+- Modified class hierarchy
+
 .. image:: https://travis-ci.org/happy5214/competitions-match.svg?branch=master
     :alt: Build status
     :target: https://travis-ci.org/happy5214/competitions-match

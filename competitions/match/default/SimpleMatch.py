@@ -20,10 +20,10 @@ from __future__ import unicode_literals
 
 import random
 
-from competitions.match.Match import Match
+from competitions.match.Match import TwoTeamMatch
 
 
-class SimpleMatch(Match):
+class SimpleMatch(TwoTeamMatch):
 
     """A simple default match simulator based on the card game "War"."""
 
@@ -35,8 +35,7 @@ class SimpleMatch(Match):
         @param team2: The second (away) team
         @type team2: An object that can be converted to a string
         """
-        self.team1 = team1
-        self.team2 = team2
+        super(SimpleMatch, self).__init__(team1, team2)
         self.score1 = ''
         """The score for team1."""
         self.score2 = ''

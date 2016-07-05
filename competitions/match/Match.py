@@ -26,3 +26,75 @@ class Match(object):
     def play(self):
         """Play the match."""
         raise NotImplementedError
+
+
+class TwoCompetitorMatch(Match):
+
+    """Base class for matches with exactly two competitors."""
+
+    @property
+    def competitor1(self):
+        """The first (usually home) competitor."""
+        raise NotImplementedError
+
+    @property
+    def competitor2(self):
+        """The second (usually away) competitor."""
+        raise NotImplementedError
+
+    @property
+    def is_walkover(self):
+        """Whether or not this match is a walkover/bye."""
+        return self.competitor1 is None or self.competitor2 is None
+
+
+class TwoTeamMatch(TwoCompetitorMatch):
+
+    """Base class for two-team matches."""
+
+    def __init__(self, team1, team2):
+        """Constructor.
+
+        @param team1: The first (home) team
+        @type team1: An object that can be converted to a string
+        @param team2: The second (away) team
+        @type team2: An object that can be converted to a string
+        """
+        self.team1 = team1
+        self.team2 = team2
+
+    @property
+    def competitor1(self):
+        """The first (usually home) competitor."""
+        raise self.team1
+
+    @property
+    def competitor2(self):
+        """The second (usually away) competitor."""
+        raise self.team2
+
+
+class TwoPlayerMatch(TwoCompetitorMatch):
+
+    """Base class for two-player matches."""
+
+    def __init__(self, player1, player2):
+        """Constructor.
+
+        @param player1: The first (home) player
+        @type player1: An object that can be converted to a string
+        @param player2: The second (away) player
+        @type player2: An object that can be converted to a string
+        """
+        self.player1 = player1
+        self.player2 = player2
+
+    @property
+    def competitor1(self):
+        """The first (usually home) competitor."""
+        raise self.player1
+
+    @property
+    def competitor2(self):
+        """The second (usually away) competitor."""
+        raise self.player2
