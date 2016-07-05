@@ -66,12 +66,12 @@ class TwoTeamMatch(TwoCompetitorMatch):
     @property
     def competitor1(self):
         """The first (usually home) competitor."""
-        raise self.team1
+        return self.team1
 
     @property
     def competitor2(self):
         """The second (usually away) competitor."""
-        raise self.team2
+        return self.team2
 
 
 class TwoPlayerMatch(TwoCompetitorMatch):
@@ -92,9 +92,9 @@ class TwoPlayerMatch(TwoCompetitorMatch):
     @property
     def competitor1(self):
         """The first (usually home) competitor."""
-        raise self.player1
+        return self.player1
 
     @property
     def competitor2(self):
         """The second (usually away) competitor."""
-        raise self.player2
+        return self.player2
