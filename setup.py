@@ -13,7 +13,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='competitions-match',
-    version='0.2.1',
+    version='0.3',
 
     description='competitions support library for matches',
     long_description=long_description,
@@ -33,6 +33,8 @@ setup(
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
     keywords='competitions matches',
 
@@ -41,11 +43,4 @@ setup(
     namespace_packages=['competitions'],
 
     test_suite='tests',
-
-    entry_points={
-        'competitions.match.base': [
-            'competitions.simple = competitions.match.default.SimpleMatch:SimpleMatch',
-            'competitions.test = competitions.match.default.TestMatch:TestMatch'
-        ]
-    },
 )

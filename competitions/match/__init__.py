@@ -1,7 +1,7 @@
 # -*- coding: utf-8  -*-
-"""Match package."""
+"""Base classes for matches."""
 
-# Copyright (C) 2015 Alexander Jones
+# Copyright (C) 2015-17 Alexander Jones
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published
@@ -18,38 +18,83 @@
 
 from __future__ import unicode_literals
 
-import pkg_resources
+
+class Match(object):
+
+    """Base class for matches."""
+
+    def play(self):
+        """Play the match."""
+        raise NotImplementedError
 
 
-class MatchConfig(object):
+class TwoCompetitorMatch(Match):
 
-    """Match configuration singleton class."""
-
-    created = False
-
-    def __init__(self):
-        """Constructor."""
-        if MatchConfig.created:
-            raise RuntimeError
-        MatchConfig.created = True
-        self._base_matches = {}
-        for match in pkg_resources.iter_entry_points(group='competitions.match.base'):
-            self._base_matches.update({match.name: match.load()})
-        self.base_match = 'competitions.simple'
+    """Base class for matches with exactly two competitors."""
 
     @property
-    def base_match(self):
-        """The "base" match class."""
-        return self._base_matches.get(self._base_match, None)
+    def competitor1(self):
+        """The first (usually home) competitor."""
+        raise NotImplementedError
 
-    @base_match.setter
-    def base_match(self, match_def):
-        """Set the "base" match class.
+    @property
+    def competitor2(self):
+        """The second (usually away) competitor."""
+        raise NotImplementedError
 
-        @param match_def: The code of the new "base" match class
-        @type match_def: str
+    @property
+    def is_walkover(self):
+        """Whether or not this match is a walkover/bye."""
+        return self.competitor1 is None or self.competitor2 is None
+
+
+class TwoTeamMatch(TwoCompetitorMatch):
+
+    """Base class for two-team matches."""
+
+    def __init__(self, team1, team2):
+        """Constructor.
+
+        @param team1: The first (home) team
+        @type team1: An object that can be converted to a string
+        @param team2: The second (away) team
+        @type team2: An object that can be converted to a string
         """
-        self._base_match = match_def
+        self.team1 = team1
+        self.team2 = team2
+
+    @property
+    def competitor1(self):
+        """The first (usually home) competitor."""
+        return self.team1
+
+    @property
+    def competitor2(self):
+        """The second (usually away) competitor."""
+        return self.team2
 
 
-config = MatchConfig()
+class TwoPlayerMatch(TwoCompetitorMatch):
+
+    """Base class for two-player matches."""
+
+    def __init__(self, player1, player2):
+        """Constructor.
+
+        @param player1: The first (home) player
+        @type player1: An object that can be converted to a string
+        @param player2: The second (away) player
+        @type player2: An object that can be converted to a string
+        """
+        self.player1 = player1
+        self.player2 = player2
+
+    @property
+    def competitor1(self):
+        """The first (usually home) competitor."""
+        return self.player1
+
+    @property
+    def competitor2(self):
+        """The second (usually away) competitor."""
+        return self.player2

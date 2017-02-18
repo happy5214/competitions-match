@@ -20,26 +20,8 @@ from __future__ import unicode_literals
 
 from . import TestCase
 
-from competitions.match import MatchConfig, config
 from competitions.match.default.SimpleMatch import SimpleMatch
 from competitions.match.default.TestMatch import TestMatch
-
-
-class TestMatchRegistration(TestCase):
-
-    """Tests for match class finding."""
-
-    def test_basic(self):
-        """Test default and explicit match classes."""
-        self.assertEqual(config.base_match, SimpleMatch)
-        config.base_match = 'competitions.test'
-        self.assertEqual(config.base_match, TestMatch)
-        config.base_match = 'competitions.unused'
-        self.assertIsNone(config.base_match)
-
-    def test_singleton(self):
-        """Test to ensure the configuration object's singleton status."""
-        self.assertRaises(RuntimeError, MatchConfig)
 
 
 class TestSimpleMatch(TestCase):
@@ -48,12 +30,10 @@ class TestSimpleMatch(TestCase):
 
     def test_simulation(self):
         """Test SimpleMatch construction and simulation."""
-        config.base_match = 'competitions.simple'
         team1 = 'First'
         team2 = 'Second'
         for __ in range(1000):
-            match = config.base_match(team1, team2)
-            self.assertIsInstance(match, SimpleMatch, 'Wrong class.')
+            match = SimpleMatch(team1, team2)
             self.assertEqual(match.team1, team1)
             self.assertEqual(match.team2, team2)
             match.play()
@@ -76,12 +56,10 @@ class TestTestMatch(TestCase):
 
     def test_simulation(self):
         """Test TestMatch construction and simulation."""
-        config.base_match = 'competitions.test'
         team1 = 'First'
         team2 = 'Second'
         for __ in range(1000):
-            match = config.base_match(team1, team2)
-            self.assertIsInstance(match, TestMatch, 'Wrong class.')
+            match = TestMatch(team1, team2)
             self.assertEqual(match.team1, team1)
             self.assertEqual(match.team2, team2)
             match.play()

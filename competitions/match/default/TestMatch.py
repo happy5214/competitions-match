@@ -18,7 +18,7 @@
 
 from __future__ import unicode_literals
 
-from competitions.match.Match import TwoTeamMatch
+from .. import TwoTeamMatch
 
 
 class TestMatch(TwoTeamMatch):

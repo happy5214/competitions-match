@@ -20,7 +20,7 @@ from __future__ import unicode_literals
 
 import random
 
-from competitions.match.Match import TwoTeamMatch
+from .. import TwoTeamMatch
 
 
 class SimpleMatch(TwoTeamMatch):
