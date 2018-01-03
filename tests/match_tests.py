@@ -43,7 +43,7 @@ class TestSimpleMatch(TestCase):
                 self.assertEqual(match.winner, team2)
             else:
                 self.assertIsNone(match.winner)
-            shortstr = '{}-{}'.format(match.score1, match.score2)
+            shortstr = '{:>3}-{:<3}'.format(match.score1, match.score2)
             self.assertEqual(match.score_str(), shortstr)
             longstr = '{} {} - {} {}'.format(team1, match.score1, match.score2,
                                              team2)
