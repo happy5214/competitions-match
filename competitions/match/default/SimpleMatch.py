@@ -1,7 +1,7 @@
 # -*- coding: utf-8  -*-
 """Simple default match simulator."""
 
-# Copyright (C) 2015 Alexander Jones
+# Copyright (C) 2015, 2016, 2017 Alexander Jones
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published
@@ -67,7 +67,7 @@ class SimpleMatch(TwoTeamMatch):
         @return: The score of the match.
         @rtype: str
         """
-        return '{0}-{1}'.format(self.score1, self.score2)
+        return '{:>3}-{:<3}'.format(self.score1, self.score2)
 
     def play(self):
         """Play the match.
@@ -93,12 +93,15 @@ class SimpleMatch(TwoTeamMatch):
         if score1 > score2:
             self.winner = self.team1
             self.loser = self.team2
+            self.drawn = False
         elif score2 > score1:
             self.winner = self.team2
             self.loser = self.team1
+            self.drawn = False
         else:
             self.winner = None
             self.loser = None
+            self.drawn = True
         self.score1 = score1
         self.score2 = score2
         return self.winner
